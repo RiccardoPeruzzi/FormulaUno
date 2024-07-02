@@ -24,6 +24,8 @@
 
 package it.unicam.mp.formulaUno.player;
 
+import it.unicam.mp.formulaUno.track.Position;
+
 /**
  * This interface represent the car
  * of the player in the game
@@ -37,4 +39,18 @@ public interface iCar {
      * @retrn boolean
      */
     boolean isInRace();
+
+    /**
+     * This method move the car
+     * @param position the edge where the car move
+     */
+    void move (Position position);
+
+    // todo decidere se lasciarla sull'interfaccia oppure mettere il metodo protected
+    /**
+     * This method calculate the new velocity
+     * of the car for the next move
+     * @return speed
+     */
+    int [] calcNewVel(int[] s, Direction direction);
 }

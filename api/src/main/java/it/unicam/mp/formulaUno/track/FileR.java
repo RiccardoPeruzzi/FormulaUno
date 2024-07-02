@@ -37,7 +37,7 @@ import java.util.List;
  *
  * @author Riccardo Peruzzi
  */
-public class FileR {
+public class FileR implements iFileR{
 
     private String path;
 
@@ -49,10 +49,8 @@ public class FileR {
         return path;
     }
 
-    /**
-     * This method read the line of the file
-     * @return a list with the lines reads.
-     */
+    //todo questo try-catch si può eliminare??
+    @Override
     public List<String> readFile() {
         String linea;
         List<String> list = new ArrayList<>();
@@ -63,35 +61,14 @@ public class FileR {
         return list;
     }
 
-    /**
-     * This method gives the measures of the
-     * matrix that will have to create
-     * @param list result by reading the file
-     * @return an array of int with the size.
-     */
-    public int [] lengths (List<String> list) {
-        int [] dim = new int [2];
-        list = readFile();
-        dim[0] = list.get(0).length(); //x
-        dim[1] = list.size();  //y
-        return dim;
+    @Override
+    public int getWidth(List<String> list) {
+        return list.get(0).length();    //x;
     }
 
-    /**
-     * This method create the matrix with the
-     * dates read on the file and the size of
-     * the list obtained by reading the file
-     * @return the matrix of the track.
-     */
-    public String [] [] createTrack () {
-        List<String> list = readFile();
-        int [] dim = lengths(list);
-        String [] [] track = new String [dim[1]] [dim[0]]; // y e x
-        for(int i = 0; i < dim[1]; i++){
-            for(int j = 0; j < dim[0]; j++){
-                track[i][j] = list.get(i).charAt(j)+" ";
-            }
-        }
-        return track;
+    @Override
+    public int getHeight(List<String> list) {
+        return list.size();  //y
     }
+
 }

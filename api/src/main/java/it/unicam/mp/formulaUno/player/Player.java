@@ -26,59 +26,70 @@ package it.unicam.mp.formulaUno.player;
 
 import it.unicam.mp.formulaUno.track.Position;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * This class represent the general player.
- * Is abstract because in the game there are
- * two type of player: bot and human player.
- * @author Riccardo Peruzzi
+ * This class represent the player
+ * in the game and choose the possible moves
+ * @autor Riccardo Peruzzi
  */
-public abstract class Player {
+public class Player implements iPlayer{
+
+    //potrebbe essere proprio l'interactive player
 
     private String name;
 
     private Car car;
 
-    private Position currentPosition;
-
-    private Position lastPosition;
-
-    public Player(String name, Car car, Position currentPosition, Position lastPosition) {
+    public Player(String name, Car car) {
         this.name = name;
         this.car = car;
-        this.currentPosition = currentPosition;
-        this.lastPosition = null;
     }
 
     public String getName() {
         return name;
     }
 
-    public Car getCar() {
-        return car;
-    }
-
-    public Position getCurrentPosition() {
-        return currentPosition;
-    }
-
-    public Position getLastPosition() {
-        return lastPosition;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Car getCar() {
+        return car;
     }
 
     public void setCar(Car car) {
         this.car = car;
     }
 
-    public void setCurrentPosition(Position currentPosition) {
-        this.currentPosition = currentPosition;
+    @Override
+    public boolean isWinner() {
+        // deve vedere se il giocatore si trova
+        // in una delle caselle che lo fanno vincere
+        return false;
     }
 
-    public void setLastPosition(Position lastPosition) {
-        this.lastPosition = lastPosition;
+    @Override
+    public List<Position> getPossibleMoves() {
+        List<Position> possibleMoves = new ArrayList<>();
+        for(Direction dir : Direction.values()){
+           int [] s = car.calcNewVel(this.car.getSpeed(), dir);
+           possibleMoves.add(new Position(car.getPosition().x()+s[0],
+                   car.getPosition().y()+s[1]));
+        }
+        return possibleMoves;
+    }
+
+    /**
+     * This method return the move
+     * that the player choose
+     * @param possibleMoves
+     * @param i index of the move
+     * @return newPosition of the car
+     */
+    public Position chooseMove(List<Position> possibleMoves, int i){
+        return  possibleMoves.get(i);
     }
 
 }

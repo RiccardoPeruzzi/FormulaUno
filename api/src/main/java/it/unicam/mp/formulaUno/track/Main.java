@@ -24,6 +24,9 @@
 
 package it.unicam.mp.formulaUno.track;
 
+import it.unicam.mp.formulaUno.player.Car;
+import it.unicam.mp.formulaUno.player.Player;
+
 public class Main {
 
     public static void main(String[] args) {

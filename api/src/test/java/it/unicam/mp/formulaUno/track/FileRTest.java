@@ -32,11 +32,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class FileRTest {
 
     @Test
-    void lengthsTest(){
+    void getWidthTest(){
         FileR file = new FileR("C://Users//ricca//Desktop//formulaUno//api//src//main//resources//Track.txt");
-        int [] dim = file.lengths(file.readFile());
-        Assertions.assertTrue(dim[0] == file.readFile().get(0).length());
-        Assertions.assertTrue(dim[1] == file.readFile().size());
+        int width = file.getWidth(file.readFile());
+        assertTrue(width == file.readFile().get(0).length());
+    }
+
+    @Test
+    void getHeigthTest(){
+        FileR file = new FileR("C://Users//ricca//Desktop//formulaUno//api//src//main//resources//Track.txt");
+        int heigth = file.getHeight(file.readFile());
+        assertTrue(heigth == file.readFile().size());
     }
 
     @Test
@@ -53,17 +59,6 @@ class FileRTest {
         String path = "C://Users//ricca//Desktop//formulaUno//api//src//main//resources//Track.txt";
         FileR file = new FileR(path);
         Assertions.assertEquals(path, file.getPath());
-    }
-
-    @Test
-    void createTrackTest(){
-        FileR file = new FileR("C://Users//ricca//Desktop//formulaUno//api//src//main//resources//Track.txt");
-        String [] [] test = file.createTrack();
-        Assertions.assertEquals("n ", test [0][0]);
-        Assertions.assertNotEquals("t ", test[0][0]);
-        Assertions.assertEquals("t ", test [7][12]);
-        Assertions.assertEquals("s ", test [20][8]);
-        Assertions.assertEquals("f ", test [21][8]);
     }
 
 }

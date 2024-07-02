@@ -28,32 +28,30 @@ package it.unicam.mp.formulaUno.track;
  * This class represent the concept of
  * position in the game, for the player
  * and the points of track.
+ *
  * @author Riccardo Peruzzi
  */
-public class Position {
+public record Position(int x, int y) {
 
-    private int x;
-
-    private int y;
-
-    public Position(int x, int y) {
-        this.x = x;
-        this.y = y;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (!(obj instanceof Position))
+            return false;
+        Position other = (Position) obj;
+        if (!(x == other.x && y == other.y))
+            return false;
+        return true;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
+    @Override
+    public String toString() {
+        return "Position{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
     }
 }

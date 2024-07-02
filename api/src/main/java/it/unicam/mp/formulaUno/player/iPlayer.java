@@ -26,23 +26,27 @@ package it.unicam.mp.formulaUno.player;
 
 import it.unicam.mp.formulaUno.track.Position;
 
+import java.util.List;
+
 /**
  * This interface represent the concept
- * of player with the methods to
- * move in the track with his car.
+ * of general player in the game.
  * @author Riccardo Peruzzi
  */
 public interface iPlayer {
 
     /**
-     * This method permits to move
-     * the car of the player in the
-     * track according to moves
-     * allowed to the player
-     * @return the new position of
-     * the player.
+     * This method is used to save
+     * if the player win the game.
+     * @return boolean
      */
-    public Position move();
+    boolean isWinner();
 
-    //todo implements
+    /**
+     * This method return a list with all
+     * the possbile move of the player.
+     * @return List<Edge>
+     */
+     List<Position> getPossibleMoves();
+
 }

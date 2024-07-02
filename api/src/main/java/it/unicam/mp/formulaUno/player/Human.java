@@ -24,8 +24,6 @@
 
 package it.unicam.mp.formulaUno.player;
 
-import it.unicam.mp.formulaUno.track.Position;
-
 /**
  * This class extends the abstract class Player
  * and represent the human that play with game.
@@ -33,8 +31,11 @@ import it.unicam.mp.formulaUno.track.Position;
  */
 public class Human extends Player {
 
-    public Human(String name, Car car, Position currentPosition, Position lastPosition) {
-        super(name, car, currentPosition, lastPosition);
+    //todo questa classe probabilmente non serve
+    // perche il giocatore umano sarebbe il giocatore interattivo
+
+    public Human(String name, Car car) {
+        super(name, car);
     }
 
 }

@@ -24,11 +24,28 @@
 
 package it.unicam.mp.formulaUno.controller;
 
+import it.unicam.mp.formulaUno.player.Player;
+import it.unicam.mp.formulaUno.track.Track;
+
+import java.util.List;
+
 /**
  * This class permits the player
  * to comunicate with track.
  * @author Riccardo Peruzzi
  */
 public class Controller {
-    //todo implements
+
+    private Track track;
+
+    private Player player;
+
+    public Controller(Track track, Player player) {
+        this.track = track;
+        this.player = player;
+    }
+
+    // potrebbe controllare se una macchina è in gara
+
+    // i turni li gestirà il motore di gioco
 }

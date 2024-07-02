@@ -24,6 +24,8 @@
 
 package it.unicam.mp.formulaUno.track;
 
+import it.unicam.mp.formulaUno.Utils.Edge;
+
 /**
  * This interface represent the concept of
  * the track of the game and contain
@@ -35,11 +37,27 @@ public interface iTrack {
     /**
      * This method shows the content
      * of the track cell
-     * @param position of which you want
-     * to know the content
+     * @param i index of y
+     * @param j index of x
      * @return the content of the cell.
      */
-    String getCell(Position position);
+    String getCell(int i, int j);
 
-    //todo add the methos that check if a position is in the track or no
+    // todo questo metodo verrà fatto nel controller
+    /**
+     * This method check if this cell
+     * there is a car or not
+     * @param position of which you want to check
+     * @return boolean
+     */
+    boolean isOccupied(Position position);
+
+    /**
+     * This method check if this position is
+     * present in the track
+     * @param position of which you want to check
+     * @return boolean
+     */
+    boolean isInTrack(Position position);
+
 }

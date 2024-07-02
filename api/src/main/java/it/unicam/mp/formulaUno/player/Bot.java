@@ -24,8 +24,6 @@
 
 package it.unicam.mp.formulaUno.player;
 
-import it.unicam.mp.formulaUno.track.Position;
-
 /**
  * This class extends the abstract class Player
  * and represent the bot, the player that is
@@ -34,9 +32,10 @@ import it.unicam.mp.formulaUno.track.Position;
  */
 public class Bot extends Player{
 
-    public Bot(String name, Car car, Position currentPosition, Position lastPosition) {
-        super(name, car, currentPosition, lastPosition);
+    public Bot(String name, Car car) {
+        super(name, car);
     }
 
-    //todo method random for choosing the move
+    //genera randomicamente un numero tra 0 e il numero di mosse
+    // che sono in getPossbileMoves così è come se ne scegliesse una
 }

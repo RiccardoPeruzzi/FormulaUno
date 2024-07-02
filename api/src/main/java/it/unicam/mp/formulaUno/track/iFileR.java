@@ -39,19 +39,19 @@ public interface iFileR {
     List<String> readFile();
 
     /**
-     * This method gives the measures of the
-     * matrix that will have to create
+     * This method gives the width of the matrix
+     * that will have to create
      * @param list result by reading the file
-     * @return an array of int with the size.
+     * @return the width of the matrix
      */
-    int[] lengths(List<String> list);
+    int getWidth (List<String> list);
 
     /**
-     * This method create the matrix with the
-     * dates read on the file and the size of
-     * the list obtained by reading the file
-     * @return the matrix of the track.
+     * This method gives the height of the matrix
+     * that will have to create
+     * @param list result by reading the file
+     * @return the height of the matrix
      */
-    String [] [] createTrack ();
+    int getHeight (List<String> list);
 
 }
