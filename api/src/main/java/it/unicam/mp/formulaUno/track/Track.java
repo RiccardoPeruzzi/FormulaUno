@@ -24,66 +24,75 @@
 
 package it.unicam.mp.formulaUno.track;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class contain the track of the
- * race and use the other class to create
- * this.
+ * This class create the track of
+ * the game by file and contains him.
  * @author Riccardo Peruzzi
  */
 public class Track implements iTrack {
 
-    private String[][] track;
+    private final String[][] track;
 
-    private FileR sourceFile;
+    private final iFileR sourceFile;
 
-    public Track(FileR sourceFile) {
+    public Track(iFileR sourceFile) {
         this.sourceFile = sourceFile;
         this.track = createTrack();
     }
 
+    @Override
     public String[][] getTrack() {
         return track;
-    }
-
-    public FileR getSourceFile() {
-        return sourceFile;
     }
 
     @Override
     public String getCell(int i, int j) {
         if (i < 0 || i >= track.length || j < 0 || j >= track[i].length)
-            throw new IllegalArgumentException("Posizione non valida");
+            throw new IllegalArgumentException("Position not valid!");
         return track[i][j];
     }
 
     @Override
-    public boolean isOccupied(Position position) {
-        return false;
+    public List<Position> startPosition() {
+        List<Position> start = new ArrayList<>();
+        for(int i = 0; i < track.length; i++)
+            for(int j = 0; j < track[i].length; j++)
+                if(track[i][j].equals("s"))
+                    start.add(new Position(i, j));
+        return start;
     }
 
     @Override
-    public boolean isInTrack(Position position) {
-        if(track[position.x()][position.y()].equals("n"))
-            return false;
-        else return true;
+    public List<Position> endPosition() {
+        List<Position> finish = new ArrayList<>();
+        for(int i = 0; i < track.length; i++)
+            for(int j = 0; j < track[i].length; j++)
+                if(track[i][j].equals("f"))
+                    finish.add(new Position(i, j));
+        return finish;
     }
 
     /**
      * This method create the track
      * and is private because is used
-     * only in this class.
+     * only by this class to create the
+     * matrix of the track.
      * @return the track
      */
     private String[][] createTrack() {
         List<String> list = sourceFile.readFile();
-        String[][] track = new String[sourceFile.getHeight(list)][sourceFile.getWidth(list)]; // y e x
+        if(list.isEmpty()) throw new IllegalArgumentException("Empty track!");
+        String[][] track = new String[sourceFile.getHeight(list)]
+                [list.getFirst().length()];
         for (int i = 0; i < sourceFile.getHeight(list); i++) {
-            for (int j = 0; j < sourceFile.getWidth(list); j++) {
-                track[i][j] = list.get(i).charAt(j) + "";
+            for (int j = 0; j < list.getFirst().length(); j++) {
+                track[j][i] = list.get(i).charAt(j) + "";
             }
         }
         return track;
     }
+
 }

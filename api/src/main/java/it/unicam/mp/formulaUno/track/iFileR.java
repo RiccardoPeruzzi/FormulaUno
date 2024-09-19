@@ -27,31 +27,32 @@ package it.unicam.mp.formulaUno.track;
 import java.util.List;
 
 /**
- * This interface permits to read a track by file
+ * This interface represent the
+ * concept about reading a file.
  * @author Riccardo Peruzzi
  */
 public interface iFileR {
 
     /**
-     *  This method read the line of the file
+     * This method gives the path
+     * of the file.
+     * @return the path.
+     */
+    String path();
+
+    /**
+     *  This method read all the
+     *  lines of the file.
      *  @return a list with the lines reads.
      */
     List<String> readFile();
 
     /**
-     * This method gives the width of the matrix
-     * that will have to create
-     * @param list result by reading the file
-     * @return the width of the matrix
-     */
-    int getWidth (List<String> list);
-
-    /**
      * This method gives the height of the matrix
-     * that will have to create
-     * @param list result by reading the file
+     * that will have to create.
+     * @param list
      * @return the height of the matrix
      */
-    int getHeight (List<String> list);
+    int getHeight (List<?> list);
 
 }

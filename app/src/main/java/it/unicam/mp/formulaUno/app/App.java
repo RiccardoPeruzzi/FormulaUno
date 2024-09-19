@@ -22,23 +22,19 @@
  * SOFTWARE.
  */
 
-package it.unicam.mp.formulaUno.track;
+package it.unicam.mp.formulaUno.app;
 
-import java.util.List;
+import it.unicam.mp.formulaUno.gameEngine.GameEngine;
 
 /**
- * This interface define the possibile
- * steps that a car can do in the track
+ * This class permits to start the game.
  * @author Riccardo Peruzzi
  */
-public interface iStep {
+public class App {
 
-    /**
-     * This method permits to know
-     * the possible steps that a car
-     * can do in the track
-     * @return a list with the possible steps
-     */
-    List<Edge> possibleSteps();
+    public static void main(String[] args) {
+        GameEngine gameEngine = new GameEngine();
+        gameEngine.startGame();
+    }
 
 }

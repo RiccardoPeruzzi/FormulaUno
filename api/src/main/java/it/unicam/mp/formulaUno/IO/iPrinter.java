@@ -22,29 +22,52 @@
  * SOFTWARE.
  */
 
-package it.unicam.mp.formulaUno.Utils;
+package it.unicam.mp.formulaUno.IO;
 
-import it.unicam.mp.formulaUno.track.Position;
+import it.unicam.mp.formulaUno.player.iPlayer;
+import it.unicam.mp.formulaUno.track.iTrack;
+
+import java.util.List;
 
 /**
- * This interface define the
- * edge of track for the game
+ * This interface represent
+ * the printer of the game.
  * @author Riccardo Peruzzi
  */
-public interface iEdge {
+public interface iPrinter {
 
     /**
-     * This method permits to know
-     * the type of the edge
-     * @return the type of edge
+     * This method print the moves
+     * that the player can do.
+     * @param player
      */
-    EdgeType getType();
+    void printMoves(iPlayer player);
 
     /**
-     * This method permits to know
-     * the position of the edge
-     * @return the position of edge
+     * This method print the track
+     * with the players.
+     * @param track
+     * @param players
      */
-    Position getPosition();
+    void printTrackWithPlayers(iTrack track, List<iPlayer> players);
+
+    /**
+     * This method print the winner
+     * of the game.
+     * @param player
+     */
+    void printWinner(iPlayer player);
+
+    /**
+     * This method print the initial
+     * message of the game.
+     */
+    void printInit();
+
+    /**
+     * This method print the fine
+     * message of the game.
+     */
+    void printFine();
 
 }

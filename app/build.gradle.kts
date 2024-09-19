@@ -8,12 +8,14 @@ plugins {
 
 dependencies {
     implementation("org.apache.commons:commons-text")
-    implementation(project(":utilities"))
     implementation(project(":api"))
 }
 
 application {
     // Define the main class for the application.
-    //mainClass = "org.example.app.App"
-    mainClass = "it.unicam.mp.formulaUno.track.Main"
+    mainClass = "it.unicam.mp.formulaUno.app.App"
+}
+
+tasks.getByName("run", JavaExec::class) {
+    standardInput = System.`in`
 }

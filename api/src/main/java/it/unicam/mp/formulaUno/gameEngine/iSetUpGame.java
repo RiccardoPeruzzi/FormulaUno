@@ -22,23 +22,27 @@
  * SOFTWARE.
  */
 
-package it.unicam.mp.formulaUno.Utils;
+package it.unicam.mp.formulaUno.gameEngine;
+
+import it.unicam.mp.formulaUno.player.iPlayer;
+import it.unicam.mp.formulaUno.track.iTrack;
 
 import java.util.List;
 
-/**
- * This interface define the possibile
- * steps that a car can do in the track
- * @author Riccardo Peruzzi
- */
-public interface iStep {
+public interface iSetUpGame{
 
     /**
-     * This method permits to know
-     * the possible steps that a car
-     * can do in the track
-     * @return a list with the possible steps
+     * This method return the
+     * list of players initialized.
+     * @return list of players
      */
-    List<Edge> possibleSteps();
+    List<iPlayer> getPlayers();
+
+    /**
+     * This method return the
+     * track initialized.
+     * @return track
+     */
+    iTrack getTrack();
 
 }

@@ -22,16 +22,38 @@
  * SOFTWARE.
  */
 
-package it.unicam.mp.formulaUno.track;
+package it.unicam.mp.formulaUno.player;
 
-public class Edge {
-    // todo implementare
-    /* prende il tracciato e cella tramite una struttra dati
-    *  e crea per ogni spigolo la posizione e con l'enumerazione
-    *  di che tipo di spigolo è
-    *  poi va ad inserire tutti gli spigolo in un set ? oppure
-    *  quest'ultima cosa va fatta in un classe a parte
-    *  successivamente il set con tutti gli spigoli va inserito
-    *  o nel track
-     */
+import it.unicam.mp.formulaUno.track.Position;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class CarTest {
+
+    @Test
+    void moveTest(){
+        Position position = new Position(8,20);
+        Car car = new Car (position);
+        car.move(new Position(10,21));
+        assertEquals(car.getPosition(), new Position(10, 21));
+        assertEquals(position, car.getLastPosition());
+        assertThrows(NullPointerException.class, () ->
+                car.move(null));
+    }
+
+    @Test
+    void speedTest (){
+        Position position = new Position (12,20);
+        Car car = new Car (position);
+        assertEquals(0, car.getSpeed()[0]);
+        assertEquals(0, car.getSpeed()[1]);
+        car.move(new Position(9,18));
+        assertTrue(car.getSpeed()[0] == -3);
+        assertTrue(car.getSpeed()[1] == -2);
+        car.move(new Position(13,22));
+        assertTrue(car.getSpeed()[0] == 4);
+        assertTrue(car.getSpeed()[1] == 4);
+    }
+
 }

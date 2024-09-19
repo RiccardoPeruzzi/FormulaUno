@@ -24,18 +24,92 @@
 
 package it.unicam.mp.formulaUno.player;
 
+import it.unicam.mp.formulaUno.track.Position;
+
+import java.util.List;
+import java.util.Random;
+
 /**
- * This class extends the abstract class Player
- * and represent the bot, the player that is
- * controlled by the computer.
+ * This class represent the bot,
+ * the player that is "controlled
+ * by the computer". He chooses
+ * the moves randomly.
  * @author Riccardo Peruzzi
  */
-public class Bot extends Player{
+public class Bot implements iPlayer {
 
-    public Bot(String name, Car car) {
-        super(name, car);
+    private String name;
+
+    private iCar car;
+
+    private List<Position> possibleMoves;
+
+    private boolean check;
+
+    public Bot(String name, iCar car) {
+        this.name = name;
+        this.car = car;
+        this.possibleMoves = calcPossibleMoves();
+        this.check = false;
     }
 
-    //genera randomicamente un numero tra 0 e il numero di mosse
-    // che sono in getPossbileMoves così è come se ne scegliesse una
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public iCar getCar() {
+        return this.car;
+    }
+
+    @Override
+    public void setCar(iCar car) {
+        this.car = car;
+    }
+
+    @Override
+    public List<Position> getPossibleMoves() {
+        return this.possibleMoves;
+    }
+
+    @Override
+    public void setPossibleMoves(List<Position> newMoves) {
+        this.possibleMoves = newMoves;
+    }
+
+    @Override
+    public boolean isCheck() {
+        return this.check;
+    }
+
+    @Override
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
+
+    /**
+     * This method return a random move.
+     * @return newPosition of the car
+     */
+    @Override
+    public Position chooseMove(int i) {
+        Random random = new Random();
+        i = random.nextInt(getPossibleMoves().size());
+        return this.getPossibleMoves().get(i);
+    }
+
+    @Override
+    public String toString() {
+        return "Bot{ " +
+                "name= '" + name + '\'' +
+                ", car " + car.getPosition() +
+                '}';
+    }
+
 }

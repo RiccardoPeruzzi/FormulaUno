@@ -26,7 +26,7 @@ package it.unicam.mp.formulaUno.player;
 
 /**
  * This enum represent the direction
- * for the movements of the car
+ * for the movements of the car.
  * @author Riccardo Peruzzi
  */
 public enum Direction {
@@ -39,5 +39,25 @@ public enum Direction {
     MIDDLE,
     LEFTDOWN,
     RIGHTDOWN;
-}
 
+    /**
+     *  This method calculate the
+     *  values of the direction car.
+     * @param direction
+     * @return array with values
+     */
+    public static int[] dirCar (Direction direction) {
+        switch (direction){
+            case LEFTUP -> {return new int[] {-1 , -1};}
+            case UP -> {return new int [] {0 , -1};}
+            case RIGHTUP -> {return new int[] {+1 , -1};}
+            case LEFT -> {return new int []{-1 , 0};}
+            case MIDDLE -> {return new int[] {0 , 0};}
+            case RIGHT -> {return new int[] {+1 , 0};}
+            case LEFTDOWN -> {return new int[] {-1 , +1};}
+            case DOWN -> {return new int[] {0, +1};}
+            default -> {return new int[] {+1 , +1};}
+        }
+    }
+
+}

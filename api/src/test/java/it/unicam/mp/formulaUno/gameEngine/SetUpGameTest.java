@@ -22,18 +22,32 @@
  * SOFTWARE.
  */
 
-package it.unicam.mp.formulaUno.Utils;
+package it.unicam.mp.formulaUno.gameEngine;
 
-/**
- * This enum contains the state of the edge of track
- * I -> edge in the circuit
- * O -> edge out of the circuit
- * S -> edge of the start
- * F -> edge of the finish
- */
-public enum EdgeType {
-    I,
-    O,
-    S,
-    F;
+import it.unicam.mp.formulaUno.track.FileR;
+import it.unicam.mp.formulaUno.track.Track;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class SetUpGameTest {
+
+    @Test
+    void setTrackTest(){
+        SetUpGame setUpGame = new SetUpGame(new FileR("Players.txt"), new FileR("Track.txt"));
+        Track track = new Track(new FileR("Track.txt"));
+        assertEquals(track.getTrack()[0][20], setUpGame.getTrack().getTrack()[0][20]);
+        assertEquals(track.getTrack()[18][20], setUpGame.getTrack().getTrack()[18][20]);
+        assertEquals(track.getTrack()[36][12], setUpGame.getTrack().getTrack()[36][12]);
+
+    }
+
+    @Test
+    void setPlayersTest(){
+        SetUpGame setUpGame = new SetUpGame(new FileR("Players.txt"), new FileR("Track.txt"));
+        assertEquals(5, setUpGame.getPlayers().size());
+        assertEquals("Player", setUpGame.getPlayers().get(0).getName());
+        assertEquals("Tullio", setUpGame.getPlayers().get(1).getName());
+        assertEquals("Yanis", setUpGame.getPlayers().get(4).getName());
+    }
 }

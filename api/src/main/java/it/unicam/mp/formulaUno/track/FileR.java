@@ -24,51 +24,34 @@
 
 package it.unicam.mp.formulaUno.track;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * This simple class permits to read in input a
- * file, in this condition the track of Formula 1,
- * and transform it in an matrix of strings.
- *
+ * file and get a list with the lines of the
+ * file. Also allows you to get information
+ * about the size of the read file.
  * @author Riccardo Peruzzi
  */
-public class FileR implements iFileR{
+public record FileR(String path) implements iFileR {
 
-    private String path;
-
-    public FileR(String path) {
-        this.path = path;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    //todo questo try-catch si può eliminare??
     @Override
     public List<String> readFile() {
         String linea;
         List<String> list = new ArrayList<>();
         try {
-            BufferedReader br = new BufferedReader(new FileReader(this.path));
+            InputStream input = FileR.class.getClassLoader().getResourceAsStream(path);
+            BufferedReader br = new BufferedReader(new InputStreamReader((input)));
             while ((linea = br.readLine()) != null) list.add(linea);
-        } catch (IOException e){ System.out.println("File non trovato"); }
+        } catch (IOException e) { System.out.println("Errore, file non trovato"); }
         return list;
     }
 
     @Override
-    public int getWidth(List<String> list) {
-        return list.get(0).length();    //x;
-    }
-
-    @Override
-    public int getHeight(List<String> list) {
-        return list.size();  //y
+    public int getHeight(List<?> list) {
+        return list.size();
     }
 
 }

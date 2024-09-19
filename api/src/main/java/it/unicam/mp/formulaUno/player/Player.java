@@ -26,70 +26,81 @@ package it.unicam.mp.formulaUno.player;
 
 import it.unicam.mp.formulaUno.track.Position;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class represent the player
- * in the game and choose the possible moves
- * @autor Riccardo Peruzzi
+ * This class is the human player in the
+ * game, he chooses the possible moves.
+ * @author Riccardo Peruzzi
  */
 public class Player implements iPlayer{
 
-    //potrebbe essere proprio l'interactive player
-
     private String name;
 
-    private Car car;
+    private iCar car;
 
-    public Player(String name, Car car) {
+    private List<Position> possibleMoves;
+
+    private boolean check;
+
+    public Player(String name, iCar car) {
         this.name = name;
         this.car = car;
+        this.possibleMoves = calcPossibleMoves();
+        this.check = false;
     }
 
+    @Override
     public String getName() {
-        return name;
+        return this.name;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
 
-    public Car getCar() {
-        return car;
+    @Override
+    public iCar getCar() {
+        return this.car;
     }
 
-    public void setCar(Car car) {
+    @Override
+    public void setCar(iCar car) {
         this.car = car;
     }
 
     @Override
-    public boolean isWinner() {
-        // deve vedere se il giocatore si trova
-        // in una delle caselle che lo fanno vincere
-        return false;
+    public List<Position> getPossibleMoves() {
+        return this.possibleMoves;
     }
 
     @Override
-    public List<Position> getPossibleMoves() {
-        List<Position> possibleMoves = new ArrayList<>();
-        for(Direction dir : Direction.values()){
-           int [] s = car.calcNewVel(this.car.getSpeed(), dir);
-           possibleMoves.add(new Position(car.getPosition().x()+s[0],
-                   car.getPosition().y()+s[1]));
-        }
-        return possibleMoves;
+    public void setPossibleMoves(List<Position> newMoves) {
+        this.possibleMoves = newMoves;
     }
 
-    /**
-     * This method return the move
-     * that the player choose
-     * @param possibleMoves
-     * @param i index of the move
-     * @return newPosition of the car
-     */
-    public Position chooseMove(List<Position> possibleMoves, int i){
-        return  possibleMoves.get(i);
+    @Override
+    public boolean isCheck() {
+        return this.check;
+    }
+
+    @Override
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
+
+    @Override
+    public Position chooseMove(int i){
+        return this.getPossibleMoves().get(i);
+    }
+
+    @Override
+    public String toString() {
+        return "Player{ " +
+                "name= '" + name + '\'' +
+                ", car " + car.getPosition() +
+                '}';
     }
 
 }

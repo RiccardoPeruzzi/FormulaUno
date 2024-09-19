@@ -11,4 +11,4 @@ plugins {
 }
 
 rootProject.name = "formulaUno"
-include("app", "list", "utilities","api")
+include("app","api")

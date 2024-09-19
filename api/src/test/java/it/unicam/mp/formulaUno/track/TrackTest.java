@@ -24,8 +24,6 @@
 
 package it.unicam.mp.formulaUno.track;
 
-import it.unicam.mp.formulaUno.Utils.Edge;
-import it.unicam.mp.formulaUno.Utils.EdgeType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -37,57 +35,61 @@ class TrackTest {
 
     @Test
     void getCellTest(){
-        Track track = new Track(new FileR("C://Users//ricca//Desktop//formulaUno//api//src//main//resources//Track.txt"));
+        Track track = new Track(new FileR("Track.txt"));
         assertThrows(IllegalArgumentException.class, () -> {
             track.getCell(40,40);
         });
-        assertTrue(track.getCell(0,0).equals("n"));
-        assertTrue(track.getCell(7,12).equals("t"));
-        assertEquals("s", track.getCell(20,8));
-        assertFalse(track.getCell(0,1).equals("f"));
+        assertEquals("-", track.getCell(0, 0));
+        assertEquals("t", track.getCell(12, 7));
+        assertEquals("s", track.getCell(8,20));
+        assertNotEquals("f", track.getCell(1, 0));
+        assertEquals("a", track.getCell(28,20));
     }
 
     @Test
-    void isInTrackTest(){
-        Track track = new Track(new FileR("C://Users//ricca//Desktop//formulaUno//api//src//main//resources//Track.txt"));
-        assertEquals(false, track.isInTrack(new Position(0,0)));
-        assertTrue(track.isInTrack(new Position(7,12)));
-        assertTrue(track.isInTrack(new Position(20,8)));
-        assertTrue(track.isInTrack(new Position(21,8)));
-        assertNotEquals(true, track.isInTrack(new Position(0,1)));
-    }
-
-    @Test
-    void TrackTest (){
-        FileR file = new FileR("C://Users//ricca//Desktop//formulaUno//api//src//main//resources//Track.txt");
-        Track track = new Track(new FileR("C://Users//ricca//Desktop//formulaUno//api//src//main//resources//Track.txt"));
+    void TrackTest(){
+        FileR file = new FileR("Track.txt");
+        Track track = new Track(new FileR("Track.txt"));
         String [] [] p1 = track.getTrack();
         String [] [] p2 = track.getTrack();
         for(int i = 0; i < file.getHeight(file.readFile());i++)
-            for(int j = 0; j < file.getWidth(file.readFile());j++)
-                Assertions.assertEquals(p1[i][j],p2[i][j]);
-    }
-
-    @Test
-    void getBoxTest (){
-        Track track = new Track(new FileR("C://Users//ricca//Desktop//formulaUno//api//src//main//resources//Track.txt"));
-        String pr1 = track.getCell(8,20);
-        String pr2 = track.getCell(7,12);
-        Assertions.assertEquals(track.getTrack()[8][20],pr1);
-        Assertions.assertEquals(track.getTrack()[7][12],pr2);
-        Assertions.assertNotEquals(track.getTrack()[1][1],"b");
+            for(int j = 0; j < file.readFile().getFirst().length();j++)
+                Assertions.assertEquals(p1[j][i],p2[j][i]);
     }
 
     @Test
     void createTrackTest(){
-        FileR file = new FileR("C://Users//ricca//Desktop//formulaUno//api//src//main//resources//Track.txt");
+        FileR file = new FileR("Track.txt");
         Track track = new Track(file);
         String [] [] test = track.getTrack();
-        assertEquals("n", test [0][0]);
+        assertEquals("-", test [0][0]);
         assertNotEquals("t", test[0][0]);
-        assertEquals("t", test [7][12]);
-        assertEquals("s", test [20][8]);
-        assertEquals("f", test [21][8]);
+        assertEquals("t", test [12][7]);
+        assertEquals("s", test [8][20]);
+        assertEquals("f", test [8][21]);
+        assertEquals("a", test[28][20]);
+    }
+
+    @Test
+    void startPositionTest(){
+        Track track = new Track(new FileR("Track.txt"));
+        List<Position> start = track.startPosition();
+        assertTrue(start.contains(new Position(8, 20)));
+        assertNotEquals(true, start.contains(new Position(0,0)));
+        assertTrue(start.contains(new Position(9,20)));
+        assertTrue(start.contains(new Position(11,20)));
+        assertFalse(start.contains(new Position(39,39)));
+    }
+
+    @Test
+    void endPositionTest(){
+        Track track = new Track(new FileR("Track.txt"));
+        List<Position> end = track.endPosition();
+        assertTrue(end.contains(new Position(8, 21)));
+        assertNotEquals(true, end.contains(new Position(0,0)));
+        assertTrue(end.contains(new Position(9,21)));
+        assertTrue(end.contains(new Position(11,21)));
+        assertFalse(end.contains(new Position(39,0)));
     }
 
 }

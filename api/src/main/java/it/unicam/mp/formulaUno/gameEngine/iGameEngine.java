@@ -22,30 +22,27 @@
  * SOFTWARE.
  */
 
-package it.unicam.mp.formulaUno.controller;
+package it.unicam.mp.formulaUno.gameEngine;
 
-import it.unicam.mp.formulaUno.player.Player;
-import it.unicam.mp.formulaUno.track.Track;
-
-import java.util.List;
+import it.unicam.mp.formulaUno.player.iPlayer;
 
 /**
- * This class permits the player
- * to comunicate with track.
+ * This interface represents the game engine
+ * of the game.
  * @author Riccardo Peruzzi
  */
-public class Controller {
+public interface iGameEngine {
 
-    private Track track;
+    /**
+     * This method permits to
+     * start a new game.
+     */
+    void startGame();
 
-    private Player player;
-
-    public Controller(Track track, Player player) {
-        this.track = track;
-        this.player = player;
-    }
-
-    // potrebbe controllare se una macchina è in gara
-
-    // i turni li gestirà il motore di gioco
+    /**
+     * This method permits to
+     * play a turn of the game.
+     * @param player
+     */
+    void turn(iPlayer player);
 }

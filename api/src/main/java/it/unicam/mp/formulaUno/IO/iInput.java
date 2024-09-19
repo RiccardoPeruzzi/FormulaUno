@@ -22,14 +22,27 @@
  * SOFTWARE.
  */
 
-package it.unicam.mp.formulaUno.track;
+package it.unicam.mp.formulaUno.IO;
 
-import it.unicam.mp.formulaUno.player.Car;
-import it.unicam.mp.formulaUno.player.Player;
+/**
+ * This interface represent
+ * the input of the game.
+ * @author Riccardo Peruzzi
+ */
+public interface iInput {
 
-public class Main {
+    /**
+     * This method read the input for the number
+     * of move that the player want to do.
+     * @return the number of move.
+     */
+    int inputMove();
 
-    public static void main(String[] args) {
+    /**
+     * This method permits to insert
+     * the name of the player.
+     * @return the name of the player.
+     */
+    String inputNameOfPlayer();
 
-    }
 }

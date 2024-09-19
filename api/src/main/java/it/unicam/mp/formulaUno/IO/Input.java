@@ -22,18 +22,40 @@
  * SOFTWARE.
  */
 
-package it.unicam.mp.formulaUno.track;
+package it.unicam.mp.formulaUno.IO;
+
+import java.util.Scanner;
 
 /**
- * This enum contains the state of the edge of track
- * I -> edge in the circuit
- * O -> edge out of the circuit
- * S -> edge of the start
- * F -> edge of the finish
+ * This class is responsible for
+ * managing the input of the game.
+ * @author Riccardo Peruzzi
  */
-public enum EdgeType {
-    I,
-    O,
-    S,
-    F;
+public class Input implements iInput{
+
+    @Override
+    public int inputMove(){
+        System.out.println("Inserisci il numero della mossa che vuoi fare : ");
+        Scanner scanner = new Scanner(System.in);
+        int move = scanner.nextInt();
+        System.out.println();
+        return move;
+    }
+
+    /**
+     * If you insert the name with the small
+     * initial letter it is transformed into
+     * a large letter to insert it in the track.
+     */
+    @Override
+    public String inputNameOfPlayer() {
+        System.out.println("Inserisci il nome del tuo giocatore : ");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        if(Character.isLowerCase(input.charAt(0)))
+            input = Character.toUpperCase(input.charAt(0)) + input.substring(1);
+        System.out.println();
+        return input;
+    }
+
 }

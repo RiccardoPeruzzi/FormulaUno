@@ -22,38 +22,33 @@
  * SOFTWARE.
  */
 
-package it.unicam.mp.formulaUno.track;
+package it.unicam.mp.formulaUno.player;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FileRTest {
+class DirectionTest {
 
     @Test
-    void getHeigthTest(){
-        FileR file = new FileR("Track.txt");
-        int heigth = file.getHeight(file.readFile());
-        assertEquals(heigth, file.readFile().size());
+    void dirCarTest(){
+        assertEquals(0, Direction.dirCar(Direction.UP)[0]);
+        assertEquals(-1, Direction.dirCar(Direction.UP)[1]);
+        assertEquals(0, Direction.dirCar(Direction.DOWN)[0]);
+        assertEquals(1, Direction.dirCar(Direction.DOWN)[1]);
+        assertEquals(-1, Direction.dirCar(Direction.LEFT)[0]);
+        assertEquals(0, Direction.dirCar(Direction.LEFT)[1]);
+        assertEquals(1, Direction.dirCar(Direction.RIGHT)[0]);
+        assertEquals(0, Direction.dirCar(Direction.RIGHT)[1]);
+        assertEquals(-1, Direction.dirCar(Direction.LEFTUP)[0]);
+        assertEquals(-1, Direction.dirCar(Direction.LEFTUP)[1]);
+        assertEquals(1, Direction.dirCar(Direction.RIGHTUP)[0]);
+        assertEquals(-1, Direction.dirCar(Direction.RIGHTUP)[1]);
+        assertEquals(0, Direction.dirCar(Direction.MIDDLE)[0]);
+        assertEquals(0, Direction.dirCar(Direction.MIDDLE)[1]);
+        assertEquals(-1, Direction.dirCar(Direction.LEFTDOWN)[0]);
+        assertEquals(+1, Direction.dirCar(Direction.LEFTDOWN)[1]);
+        assertEquals(+1, Direction.dirCar(Direction.RIGHTDOWN)[0]);
+        assertEquals(+1, Direction.dirCar(Direction.RIGHTDOWN)[1]);
     }
-
-    @Test
-    void readFileTest(){
-        String path = null;
-        FileR file = new FileR(path);
-        Assertions.assertThrows(NullPointerException.class, file::readFile);
-        String path2 = "Track.txt";
-        FileR file2 = new FileR(path2);
-        assertEquals(40, file2.readFile().size());
-        assertEquals(40, file2.readFile().getFirst().length());
-    }
-
-    @Test
-    void testGetPath() {
-        String path = "Track.txt";
-        FileR file = new FileR(path);
-        Assertions.assertEquals(path, file.path());
-    }
-
 }

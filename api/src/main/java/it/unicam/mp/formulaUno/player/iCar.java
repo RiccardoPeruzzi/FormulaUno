@@ -28,29 +28,57 @@ import it.unicam.mp.formulaUno.track.Position;
 
 /**
  * This interface represent the car
- * of the player in the game
- * @autor Riccardo Peruzzi
+ * of the player in the game.
+ * @author Riccardo Peruzzi
  */
 public interface iCar {
 
     /**
-     * This method control if
-     * the car is in the track
-     * @retrn boolean
+     * This method return the
+     * current position of the car.
+     * @return position
      */
-    boolean isInRace();
+    Position getPosition();
 
     /**
-     * This method move the car
-     * @param position the edge where the car move
+     * This method set the current
+     * position of the car.
+     * @param position the position of the car
+     */
+    void setPosition(Position position);
+
+    /**
+     * This method return the last
+     * position of the car.
+     * @return position
+     */
+    Position getLastPosition();
+
+    /**
+     * This method set the last
+     * position of the car.
+     * @param lastPosition
+     */
+    void setLastPosition(Position lastPosition);
+
+    /**
+     * This method return the speed of the car.
+     * @return array with speed
+     */
+    int [] getSpeed();
+
+    /**
+     * This method set the speed of the car.
+     * @param speed
+     */
+    void setSpeed(int [] speed);
+
+    /**
+     * This method move the car.
+     * @param position where the car move
+     * @throws NullPointerException if
+     * the position is null.
      */
     void move (Position position);
 
-    // todo decidere se lasciarla sull'interfaccia oppure mettere il metodo protected
-    /**
-     * This method calculate the new velocity
-     * of the car for the next move
-     * @return speed
-     */
-    int [] calcNewVel(int[] s, Direction direction);
 }

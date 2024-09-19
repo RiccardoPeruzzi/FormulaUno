@@ -26,6 +26,7 @@ package it.unicam.mp.formulaUno.player;
 
 import it.unicam.mp.formulaUno.track.Position;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,20 +34,89 @@ import java.util.List;
  * of general player in the game.
  * @author Riccardo Peruzzi
  */
-public interface iPlayer {
+public interface iPlayer{
 
     /**
-     * This method is used to save
-     * if the player win the game.
-     * @return boolean
+     * This method return the
+     * name of the player.
+     * @return string
      */
-    boolean isWinner();
+    String getName();
+
+    /**
+     * This method set the name
+     * of the player.
+     * @param name
+     */
+    void setName(String name);
+
+    /**
+     * This method return the car
+     * of the player.
+     * @return car
+     */
+    iCar getCar();
+
+    /**
+     * This method set the car
+     * of the player.
+     * @param car
+     */
+    void setCar(iCar car);
 
     /**
      * This method return a list with all
-     * the possbile move of the player.
-     * @return List<Edge>
+     * the possible moves of the player by
+     * the current position.
+     * @return List<Position>
      */
-     List<Position> getPossibleMoves();
+    List<Position> getPossibleMoves();
+
+    /**
+     * This method set the possible moves.
+     * @param newMoves
+     */
+    void setPossibleMoves(List<Position> newMoves);
+
+    /**
+     * This method return if the player
+     * has passed the race check.
+     * @return boolean
+     */
+    boolean isCheck ();
+
+    /**
+     * This method set if the player
+     * has passed the race check.
+     * @param check
+     */
+    void setCheck (boolean check);
+
+    /**
+     * This method return a list with all
+     * the possible moves of the player.
+     * Is implemented by default as
+     * common to both types of player.
+     * @return List<Position>
+     */
+    default List<Position> calcPossibleMoves(){
+        List<Position> possibleMoves = new ArrayList<>();
+         for(Direction dir : Direction.values()){
+             possibleMoves.add(new Position(
+                     (getCar().getPosition().x() +
+                             getCar().getSpeed()[0] + Direction.dirCar(dir)[0]),
+                     (getCar().getPosition().y() +
+                             getCar().getSpeed()[1] + Direction.dirCar(dir)[1])));
+         }
+         return possibleMoves;
+     }
+
+    /**
+     * This method return the move
+     * that the player choose.
+     * @param i index of the move
+     * @return newPosition of the car
+     */
+    Position chooseMove(int i);
 
 }

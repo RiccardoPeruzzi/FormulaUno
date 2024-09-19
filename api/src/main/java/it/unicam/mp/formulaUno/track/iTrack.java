@@ -24,7 +24,7 @@
 
 package it.unicam.mp.formulaUno.track;
 
-import it.unicam.mp.formulaUno.Utils.Edge;
+import java.util.List;
 
 /**
  * This interface represent the concept of
@@ -35,29 +35,34 @@ import it.unicam.mp.formulaUno.Utils.Edge;
 public interface iTrack {
 
     /**
+     * This method return the track.
+     * @return the track
+     */
+    String[][] getTrack();
+
+    /**
      * This method shows the content
-     * of the track cell
+     * of the track cell.
      * @param i index of y
      * @param j index of x
-     * @return the content of the cell.
+     * @throws IllegalArgumentException
+     * if the position is not valid
+     * @return the content of the cell
      */
     String getCell(int i, int j);
 
-    // todo questo metodo verrà fatto nel controller
     /**
-     * This method check if this cell
-     * there is a car or not
-     * @param position of which you want to check
-     * @return boolean
+     * This method return the start position
+     * of the track
+     * @return List of position
      */
-    boolean isOccupied(Position position);
+    List<Position> startPosition();
 
     /**
-     * This method check if this position is
-     * present in the track
-     * @param position of which you want to check
-     * @return boolean
+     * This method return the end position
+     * of the track
+     * @return List of position
      */
-    boolean isInTrack(Position position);
+    List<Position> endPosition();
 
 }
